@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import { Fragment } from 'react';
 import './App.css';
+import Feed from './Components/Feed/Feed';
+import Header from './Components/header/Header';
+import Login from './Components/Login/Login';
+import Sidebar from './Components/Sidebar/Sidebar';
+import Widgets from './Components/Widgets/Widgets';
+import { useStateValue } from './StateProvider';
+
 
 function App() {
+  const [{ user }] = useStateValue();
+   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // BEN naming convention - npm install firebase - npm install -g firebase-tools
+    <div className="app">
+      {!user ? (<Login/>) : (
+        <Fragment>
+          <Header/>
+      <div className="app__body">
+        <Sidebar/>
+        <Feed/>
+      <Widgets/>
+      </div>
+        </Fragment>
+      )}
+      
+      
+
     </div>
   );
 }
 
 export default App;
+
+
